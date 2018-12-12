@@ -1,0 +1,37 @@
+﻿
+<h1>Update People</h1>
+<p>
+    Only change the fields that need to be updated
+</p>
+
+<h2>Update {{people.fname}} {{people.lname}} </h2>
+<form id="updatepeople" class="form-horizontal" >
+
+    <label for="person-fname">
+        First name:
+        <input type="text" name="fname" value="{{people.fname}}" >
+    </label><br>
+    
+    <label for="person-lname">
+        Last name:
+        <input type="text" name="lname" value="{{people.lname}}" >
+    </label><br>
+
+    <label for="birthdate">
+        Birthdate: 
+        <input type="date" name="birthdate" value="{{people.birthdate}}" >
+    </label><br>
+
+    <label for="current-continent">
+        Current Continent: 
+        <select name="currentContinent" id="selectCurrentContinent">
+            {{#each continents}}
+            <option value="{{this.continentID}}">{{this.name}}</option>
+            {{/each}}
+        </select>
+    </label><br>
+
+</form>
+
+<button onclick="updatePeople({{people.personID}})" class="btn btn-primary"> Update </button>
+<script defer>selectCurrentContinent("{{people.continentID}}")</script>

@@ -1,0 +1,18 @@
+{
+  "name": "health database",
+  "version": "1.0.0",
+  "description": "people, health, and environment",
+  "main": "load.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "OSU",
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.4",
+    "express-handlebars": "^3.0.0",
+    "mysql": "^2.16.0",
+    "node": "^11.0.0"
+  }
+}

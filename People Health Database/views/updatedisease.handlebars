@@ -1,0 +1,41 @@
+﻿<h1>Update Disease</h1>
+<p>
+    Only change the fields that need to be updated
+</p>
+
+<form id="updatedisease" action="/disease" method="post" class="form-horizontal">
+    <h2>Update {{disease.name}}</h2>
+    
+    <label for="disease">
+        Disease name:
+        <input type="text" name="name" id="disease-name" value="{{disease.name}}" required>
+    </label><br>
+
+   <label for="lifestyle">
+        Lifestyle Influence:
+        <select name="lifestyleInfluence" id="lifestyle-selector">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+   </label><br>
+        
+    <label for="hereditary">
+        Hereditary:
+        <select name="hereditary" id="hereditary-selector">
+            <option value="1">Yes</option>
+            <option value="0">No</option>
+        </select>
+    </label><br>
+
+    <label for="medicine">
+        Medicine Name:
+        <input type="text" name="medicine" id="medicine" value="{{disease.medicine}}" required>
+    </label><br>
+
+    
+</form>
+
+<button onclick="updateDisease({{disease.id}})" class="btn btn-primary"> Update </button>
+
+<script defer>selectlifestyleInfluence({{disease.lifestyleInfluence}});</script>
+<script defer>selecthereditary({{disease.hereditary}});</script>

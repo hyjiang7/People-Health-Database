@@ -1,0 +1,89 @@
+﻿    <h1>About the Continents</h1>
+    <p>
+        These are the 7 continents in this database world. The continents each have a name, climate, public health status, population and a disease ID.
+        The climate describes the climate with tropical, dry, cold and hot being a few examples. There is only one climate per continent. Pulic health status-header
+        describes the cleaniness of the continent's environment in 3 levels: dirty, normal or clean. The disease name describes the primary ID of the disease entity. 
+        The disease should be only added if more than 50% of the population has that disease. 
+    </p>
+
+   <form id="add-continent" action='/continent' method="post" class="form-horizontal">
+        <h2>Add A Continent</h2>
+        <label for="continent">
+            Continent name:
+        <input type="text" name="name" id="continent-name" required>
+        </label><br>
+
+        <label>
+            Climate: 
+            <select name="climate">
+                <option value="wet" selected>wet</option>
+                <option value="dry">dry</option>
+                <option value="cold">cold</option>
+                <option value="tropical">tropial</option>
+                <option value="hot">hot</option>
+                <option value="humid">humid</option>
+            </select>
+        </label><br>
+
+        
+        <label> Public Health: 
+        <select name="publicHealth">
+            <option value="Clean" selected>clean</option>
+            <option value="Normal">normal</option>
+            <option value="Dirty">dirty</option>
+        </select>
+        </label><br>
+
+        <label>
+            Population:
+            <input type="number" name="population" id="population" required>
+        </label><br>
+
+        <label>
+            Disease Name:
+            <select name="diseaseID">
+                <option value="null">None</option>
+                {{#each diseases}}
+                <option value={{this.diseaseID}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+        <input type="submit"  value="Submit" id="add-continent" class="btn btn-primary">
+    </form>
+    
+    <h3>Continents in our database</h3>
+    <table id="continent-table" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+            <th hidden>ID</th>
+            <th>Continent name</th>
+            <th>Climate</th>
+            <th>Public Health Status</th>
+            <th>Population</th>
+            <th>Disease Name</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        
+        <!--When the user presses refresh, the contents in mysql will be loaded through this code-->
+        {{#if continent}}
+        {{#each continent}}
+        <tr>
+            <td hidden>{{this.continentID}}</td>
+            <td>{{this.name}}</td>
+            <td>{{this.climate}}</td>
+             <td>{{this.publicHealth}}</td>
+            <td>{{this.population}}</td>
+            <td>{{this.diseaseName}}</td>
+            <td>
+                <a href="/continent/{{continentID}}" class="btn btn-info">Update</a>
+            </td>
+           <td>
+            <button onclick="deletecontinent({{continentID}})" class="btn btn-danger">Delete</button>
+        </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+
+    </table>

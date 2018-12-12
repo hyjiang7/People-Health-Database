@@ -1,0 +1,71 @@
+﻿    <h1>About the People</h1>
+    <p>
+        These are the list of people that have been added to the database. All of these people have been diagnosed 
+        with one or more diseases. The people are identified by their first and last name, their birthdate and the current
+        continent in which they are lviing in. 
+    </p>
+    
+    <form id="add-people" method="post" action="/people" class="form-horizontal ">
+        <h2>Add a person</h2>
+
+        <label for="person-fname">
+            First name:
+            <input type="text" name="fname" id="person-fname" required>
+        </label><br>
+        
+        <label for="person-lname">
+            Last name:
+            <input type="text" name="lname" id="person-lname" required>
+        </label><br>
+
+        <label for="birthdate">
+            Birthdate: 
+            <input type="date" name="birthdate" id="birthdate" required>
+        </label><br>
+
+        <label for="current-continent">
+            Current Continent: 
+            <select name="currentContinent">
+                {{#each continents}}
+                <option value="{{this.continentID}}">{{this.name}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+        <input type="submit" value="Submit" class="btn btn-primary">
+    </form>
+    <h3>The people in our database</h3>
+    <table id="people-table" class="table table-striped table-bordered table-hover">
+        <caption hidden>The people in our database</caption>
+        <thead>
+            <tr>
+                <th hidden>ID</th>
+                <th>Person first name</th>
+                <th>Person last name</th>
+                <th>Birthdate</th>
+                <th>Current Continent</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        
+        <!--When the user presses refresh, the contents in mysql will be loaded through this code-->
+        {{#if people}}
+        {{#each people}}
+        <tr>
+            <td hidden>{{this.personID}}</td>
+            <td>{{this.fname}}</td>
+            <td>{{this.lname}}</td>
+            <td>{{this.birthdate}}</td>
+            <td>{{this.currentContinent}}</td>
+            <td>
+                <a href="/people/{{personID}}" class="btn btn-info">Update</a>
+            </td>
+            <td>
+                 <button onclick="deletepeople({{personID}})" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+
+    </table>
+

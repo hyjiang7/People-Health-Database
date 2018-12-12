@@ -1,0 +1,36 @@
+
+<h1>Update People/Status</h1>
+<p>
+    Only change the fields that need to be updated
+</p>
+
+<h2>Update {{ps.fname}} {{ps.lname}}'s relationship</h2>
+<form id="updateps" method="get" class="form-inline">
+    <label for="personID">
+            Person: 
+            <select name="personID" class="form-control" id="selectPersonID">
+                {{#each people}}
+                <option value="{{this.personID}}">{{this.fname}} {{this.lname}}</option>
+                {{/each}}
+            </select>
+    </label><br>
+
+    <label for="statusID">
+        Status: 
+        <select name="statusID" class="form-control" id="selectStatusID">
+            {{#each status}}
+            <option value="{{this.statusID}}">{{this.name}}: {{this.explanation}}: {{this.diseaseName}}</option>
+            {{/each}}
+        </select>
+    </label><br>
+
+    <label for="dateAdded" >
+        Date Updated: 
+        <input type="date" name="dateAdded" id="dateAdded" required value={{ps.dateAdded}}>
+    </label><br>
+
+</form>
+
+<button onclick="updatePs({{ps.psID}})" class="btn btn-primary"> Update </button>
+<script defer>selectPersonID("{{ps.personID}}")</script>
+<script defer>selectStatusID("{{ps.statusID}}")</script>

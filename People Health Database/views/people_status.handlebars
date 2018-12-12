@@ -1,0 +1,105 @@
+    <h1>About the People/Status</h1>
+    <p>
+        This page allows users to add a person and their status. The table displayed shows the person's first and last name, and it's full status, including status name,
+        status explanation, and disease if applicable. 
+    </p>
+    <!--Add a pds relationship -->
+    <form id="add-relationship" method="post" action="/people_status" class="form-inline">
+        <h2>Add a relationship</h2>
+
+        <label for="personID">
+            Person: 
+            <select name="personID" class="form-control">
+                {{#each people}}
+                <option value="{{this.personID}}">{{this.fname}} {{this.lname}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+
+        <label for="statusID">
+            Status: 
+            <select name="statusID" class="form-control">
+                {{#each status}}
+                <option value="{{this.statusID}}">{{this.name}}: {{this.explanation}}: {{this.diseaseName}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+
+        <label for="dateAdded">
+            Date Added: 
+            <input type="date" name="dateAdded" id="dateAdded" required>
+        </label><br>
+
+        <input type="submit" value="Submit" id="ps.add" class="btn btn-primary">
+    </form>
+
+
+    <!--Filter ps by people -->
+    <form class="form-inline">
+        <h2>Filter results by Person's name: </h2>
+        <select name="personID" id="filter-people" class="form-control">
+            {{#each people}}
+                <option value="{{this.personID}}">{{this.fname}} {{this.lname}}</option>
+            {{/each}}
+        </select>
+        <input type="button" value="Filter" onclick="filterPsByPeople()" class="btn btn-success">
+    </form>
+
+    <!--Filter ps by status -->
+    <form class="form-inline">
+        <h2>Filter results by Status name: </h2>
+        <select name="statusID" id="filter-status" class="form-control">
+            {{#each status}}
+            <option value="{{this.statusID}}">{{this.name}}: {{this.explanation}}:{{this.diseaseName}}</option>
+            {{/each}}
+        </select>
+        <input type="button" value="Filter" onclick="filterPsByStatus()" class="btn btn-success">
+    </form>
+
+    <!--Filter ps by date -->
+    <form class="form-inline">
+        <h2>Filter results by Date: </h2>
+        <select name="dateAdded" id="filter-date" class="form-control">
+            <option value="1">Most Recent</option>
+           <option value="2">Oldest</option>
+        </select>
+        <input type="button" value="Filter" onclick="filterPsByDate()" class="btn btn-success">
+    </form>
+    
+    <h3>The current relationships in our database: </h3>
+    <table id="bsg-table" class="table table-striped table-bordered table-hover">
+        <thead>
+            <tr>
+            <th hidden>ID</th>
+            <th>Person FirstName</th>
+            <th>Person LastName</th>
+            <th>Status</th>
+            <th>Disease</th>
+            <th>Date Added/Updated</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        
+        <!--When the user presses refresh, the contents in mysql will be loaded through this code-->
+        {{#if ps}}
+        {{#each ps}}
+        <tr>
+            <td hidden>{{this.psID}}</td>
+            <td>{{this.fname}}</td>
+            <td>{{this.lname}}</td>
+            <td>{{this.name}}: {{this.explanation}}</td>
+            <td>{{this.diseaseName}}</td>
+            <td>{{this.dateAdded}}</td>
+            <td>
+                <a  href="/people_status/{{this.psID}}" class="btn btn-info">Update</a>
+            </td>
+            <td>
+                <button onclick="deleteps({{this.psID}})" class="btn btn-danger">Delete</button>
+            </td>
+        </tr>
+        {{/each}}
+        {{/if}}
+
+    </table>
+

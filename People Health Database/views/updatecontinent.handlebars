@@ -1,0 +1,61 @@
+﻿
+<h1>Update the Continent</h1>
+<p>
+    Only change the fields that need to be updated
+</p>
+
+<form id="updatecontinent" action="/continent" method="post" class="form-horizontal">
+    <h2>Update {{continent.name}}</h2>
+    
+    <label for="continent">
+            Continent name:
+        <input type="text" name="name" value="{{continent.name}}" required>
+        </label><br>
+
+        <label>
+            Climate: 
+            <select name="climate" id="selectClimate" >
+                <option value="wet">wet</option>
+                <option value="dry">dry</option>
+                <option value="cold">cold</option>
+                <option value="tropical">tropial</option>
+                <option value="hot">hot</option>
+                <option value="humid">humid</option>
+            </select>
+        </label><br>
+
+        
+        <label> 
+            Public Health: 
+            <select name="publicHealth" id="selectPublicHealth" >
+                <option value="clean">clean</option>
+                <option value="normal">normal</option>
+                <option value="dirty">dirty</option>
+            </select>
+        </label><br>
+
+        <label>
+            Population:
+            <input type="number" name="population" value="{{continent.population}}" required>
+        </label><br>
+
+        <label>
+            Disease Name:
+            <select name="diseaseID" id="selectDiseaseName">
+                <option value="NULL">null</option>
+                {{#each diseases}}
+                <option value={{this.diseaseID}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+
+</form>
+
+<button onclick="updateContinent({{continent.id}})" class="btn btn-primary"> Update </button>
+
+
+<script defer>selectClimate("{{continent.climate}}");</script>
+<script defer>selectPublicHealth("{{continent.publicHealth}}");</script>
+<script defer>selectDiseaseName("{{continent.diseaseID}}");</script>
+
+

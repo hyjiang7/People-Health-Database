@@ -1,0 +1,65 @@
+﻿
+<h1>About the Status</h1>
+<p>
+    These are the list of current statuses used to describe the people's diseases. A status has a name, and an explanation of the status.
+    Example names of statuses can be cured, deceased or ongoing. Example explanations can be deceased from diseases, still taking medicine,
+    or cured from medicine. If there is a disease associated with the status, add the disease name. Otherwise, leave disease to be null/none. 
+</p>
+
+<form id="add-status" action="/status" method="post" class="form-horizontal">
+    <h2>Add a status</h2>
+    <label for="status">
+        Status name:
+        <input type="text" name="name" id="status-name" class="form-control rounded-0" required>
+    </label><br>
+
+    <label for="explanation">Explanation: 
+        <textarea rows="4" cols="24" maxlength="256" id="explanation" name="explanation" class="form-control rounded-0" required></textarea>
+    </label><br>
+
+    <label>
+            Disease Name:
+            <select name="diseaseID" class="form-control">
+                <option value="null"> none</option>
+                {{#each diseases}}
+                <option value={{this.diseaseID}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+        </label><br>
+    
+    <input type="submit" value="Submit" class="btn btn-primary">
+</form>
+
+<h3>Statuses in our database</h3>
+<table id="status-table" class="table table-striped table-bordered table-hover">
+     <caption hidden> Statuses in our databas</caption>
+    <thead>
+        <tr>
+            <th hidden>ID</th>
+            <th>Status name</th>
+            <th>Explanation</th>
+            <th>Disease Name</th>
+            <th>Edit</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    
+    <!--When the user presses refresh, the contents in mysql will be loaded through this code-->
+    {{#if status}}
+    {{#each status}}
+    <tr>
+        <td hidden>{{this.statusID}}</td>
+        <td>{{this.name}}</td>
+        <td>{{this.explanation}}</td>
+        <td>{{this.diseaseName}}</td>
+        <td>
+            <a href="/status/{{statusID}}" class="btn btn-info">Update</a>
+        </td>
+        <td>
+            <button onclick="deletestatus({{statusID}})" class="btn btn-danger">Delete</button>
+        </td>
+    </tr>
+    {{/each}}
+    {{/if}}
+
+</table>

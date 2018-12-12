@@ -1,0 +1,33 @@
+﻿<h1>Update Status</h1>
+<p>
+    Only change the fields that need to be updated
+</p>
+
+<h2>Update {{status.name}}</h2>
+
+<form id="updatestatus" action="/status/" method="post" class="form-horizontal">
+    <label for="status" >
+        Status name:
+        <input type="text" name="name" value="{{status.name}}" class="form-control">
+    </label><br>
+
+    <label for="explanation">Explanation: 
+        <textarea rows="4" cols="24" maxlength="256" name="explanation" value="{{status.explanation}}" class="form-control">{{status.explanation}}</textarea>
+    </label><br>
+
+    <label>
+            Disease Name:
+            <select name="diseaseID" class="form-control" id="selectDiseaseID">
+                <option value="null">none</option>
+                {{#each diseases}}
+                <option value={{this.diseaseID}}>{{this.name}}</option>
+                {{/each}}
+            </select>
+    </label><br>
+    
+</form>
+
+
+<button onclick="updateStatus({{status.statusID}})" class="btn btn-primary"> Update </button>
+<script defer>selectDiseaseID("{{status.diseaseID}}");</script>
+
